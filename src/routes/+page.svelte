@@ -10,6 +10,7 @@
     let BPM = 80;
     let isToneStarted = false;
     let patternsNum = $state(0);
+    let patternComponents: PatternComponent[] = $state([]);
 
     async function startAll() {
         if (!isToneStarted) {
@@ -24,7 +25,7 @@
     function stopAll() {
         Tone.getTransport().stop();
         Tone.getTransport().cancel();
-
+        patternComponents.forEach(component => component.stop());
     }
 
     function addNewPattern() {
@@ -46,7 +47,7 @@
 </div>
 
 {#each Array(patternsNum) as _, i}
-    <PatternComponent />
+    <PatternComponent bind:this={patternComponents[i]} />
 {/each}
 
 <style>

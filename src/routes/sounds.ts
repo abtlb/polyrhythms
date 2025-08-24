@@ -1,3 +1,15 @@
+import cowbellAsset from "$lib/assets/sounds/cowbell-808.wav";
+import hihatAsset from "$lib/assets/sounds/hihat-acoustic01.wav";
+import kickAsset from "$lib/assets/sounds/kick-stomp.wav";
+import snareAsset from "$lib/assets/sounds/snare-acoustic02.wav";
+import perc808Asset from "$lib/assets/sounds/perc-808.wav";
+import percHollowAsset from "$lib/assets/sounds/perc-hollow.wav";
+import percShortAsset from "$lib/assets/sounds/perc-short.wav";
+import percTamboAsset from "$lib/assets/sounds/perc-tambo.wav";
+import percTribalAsset from "$lib/assets/sounds/perc-tribal.wav";
+import tom1Asset from "$lib/assets/sounds/tom-acoustic01.wav";
+import rototomAsset from "$lib/assets/sounds/tom-rototom.wav";
+
 export interface Sound {
     name: string;
     path: string;
@@ -6,47 +18,47 @@ export interface Sound {
 export const sounds: Record<string, Sound> = {
     cowbell: {
         name: "Cowbell",
-        path: "$lib/assets/sounds/cowbell-808.wav"
+        path: cowbellAsset
     },
     hihat: {
         name: "HiHat",
-        path: "$lib/assets/sounds/hihat-acoustic01.wav"
+        path: hihatAsset
     },
     kick: {
         name: "Kick",
-        path: "$lib/assets/sounds/kick-stomp.wav"
+        path: kickAsset
     },
     snare: {
         name: "Snare",
-        path: "$lib/assets/sounds/snare-acoustic02.wav"
+        path: snareAsset
     },
     perc808: {
         name: "808 Percussion",
-        path: "$lib/assets/sounds/perc-808.wav"
+        path: perc808Asset
     },
     percHollow: {
         name: "Hollow Percussion",
-        path: "$lib/assets/sounds/perc-hollow.wav"
+        path: percHollowAsset
     },
     percShort: {
         name: "Short Percussion",
-        path: "$lib/assets/sounds/perc-short.wav"
+        path: percShortAsset
     },
     percTambo: {
         name: "Tambourine Percussion",
-        path: "$lib/assets/sounds/perc-tambo.wav"
+        path: percTamboAsset
     },
     percTribal: {
         name: "Tribal Percussion",
-        path: "$lib/assets/sounds/perc-tribal.wav"
+        path: percTribalAsset
     },
     tom1: {
         name: "Tom 1",
-        path: "$lib/assets/sounds/tom-acoustic01.wav"
+        path: tom1Asset
     },
     rototom: {
         name: "Rototom",
-        path: "$lib/assets/sounds/tom-rototom.wav"
+        path: rototomAsset
     },
     
     

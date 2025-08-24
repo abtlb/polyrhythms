@@ -1,13 +1,17 @@
 import * as Tone from 'tone';
 
 export class Pattern {
+    //4n/8n/8t/etc...
     noteType: string;
+
+    //'X' pattern sound
+    //'O' silence 
     notes: boolean[];
     length: number;
     soundPath: string;
+
     player: Tone.Player | null;
     loop: Tone.Loop | null;
-    currentStep: number;
 
     constructor(noteType: string, notes: boolean[], soundPath: string) {
         this.noteType = noteType;
@@ -16,30 +20,44 @@ export class Pattern {
         this.player = null;
         this.loop = null;
         this.soundPath = soundPath;
-        this.currentStep = 0;
     }
 
     async play() {
         if (!this.player) {
             this.player = new Tone.Player(this.soundPath).toDestination();
-            await Tone.loaded();
+            await Tone.loaded(); // Wait for audio to load
         }
-
-        if (!this.loop) {
             this.loop = new Tone.Loop((time) => {
-                // Play current step if it's true
-                if (this.notes[this.currentStep] === true) {
-                    this.player!.start(time);
-                }
-                
-                // Move to next step
-                this.currentStep = (this.currentStep + 1) % this.length;
-            }, this.noteType) // Use noteType directly, not calculated duration
-            .start(0);
+                this.notes.forEach((note, index) => {
+                    console.log(`Pattern loop at time: ${time}`);
+                    if (note === true) {
+                        this.player!.start(time + Tone.Time(this.noteType).toSeconds() * index);
+
+                        setInterval(() => {
+                            console.log(`Playing note`);
+                        }, time + Tone.Time(this.noteType).toSeconds() * index);
+                    }
+                });
+            }, Tone.Time(this.noteType).toSeconds() * this.length); // Loop duration
+
+        this.loop.start(0);
+    }
+
+    toggleMute() {
+        if (this.player) {
+            this.player.mute = !this.player.mute;
         }
     }
 
     stop() {
+        if(this.loop) {
+            this.loop.stop();
+            this.loop.dispose();
+            this.loop = null;
+        }
+    }
+
+    dispose() {
         if (this.loop) {
             this.loop.stop();
             this.loop.dispose();
@@ -49,6 +67,5 @@ export class Pattern {
             this.player.dispose();
             this.player = null;
         }
-        this.currentStep = 0;
     }
 }

@@ -16,8 +16,4 @@ export class MultiPattern {
         await Tone.start();
         this.patterns.forEach(pattern => pattern.play());
     }
-
-    stop() {
-        this.patterns.forEach(pattern => pattern.stop());
-    }
 }
